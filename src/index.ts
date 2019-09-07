@@ -1,18 +1,19 @@
 // Agregar modulos
-import express, {Application} from 'express';
+import express, { Application } from 'express';
 import homeRouter from './routers/HomeRouter'
+import contactoRouter from './routers/ContactoRouter';
 
 // definicion de la clase para crear el servidor
-class Server{
+class Server {
 
     // Aplicacion web debe tener -> servicio + puerto
-    app : Application;
+    app: Application;
     port: any;
-    constructor(){
+    constructor() {
         // Ya vas a existir ... pero todabia no :( 
         this.app = express();
         this.port = process.env.port || 3000;
-        this.app.set('port',this.port);
+        this.app.set('port', this.port);
 
         this.app.set('port', this.port);
         this.app.use(express.json());
@@ -20,20 +21,21 @@ class Server{
         this.configurarServidor();
     }
 
-configurarServidor():void{
+    configurarServidor(): void {
 
-    this.app.use('/', homeRouter)
-}
+        this.app.use('/', homeRouter)
+        this.app.use('/api/contacto', contactoRouter);
+    }
 
 
-iniciar(): void{
+    iniciar(): void {
 
-    this.app.listen(this.port,( ) =>{
-        
-        console.log('servicio corriendo en el puerto: ', this.port);
-    });
+        this.app.listen(this.port, () => {
 
-}
+            console.log('servicio corriendo en el puerto: ', this.port);
+        });
+
+    }
 
 }
 // instanciar objetos ...

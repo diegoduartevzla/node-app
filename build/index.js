@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Agregar modulos
 const express_1 = __importDefault(require("express"));
 const HomeRouter_1 = __importDefault(require("./routers/HomeRouter"));
+const ContactoRouter_1 = __importDefault(require("./routers/ContactoRouter"));
 // definicion de la clase para crear el servidor
 class Server {
     constructor() {
@@ -19,6 +20,7 @@ class Server {
     }
     configurarServidor() {
         this.app.use('/', HomeRouter_1.default);
+        this.app.use('/api/contacto', ContactoRouter_1.default);
     }
     iniciar() {
         this.app.listen(this.port, () => {
